@@ -1,0 +1,17 @@
+services:
+  safebank-db:
+    image: postgres:latest
+    container_name: safebank-db
+    restart: unless-stopped
+    ports:
+      - 5480:5432
+    volumes:
+      - safeBank_data:/var/lib/postgres
+    environment:
+      POSTGRES_USER: safe_user
+      POSTGRES_DB: safedb
+      POSTGRES_PASSWORD: safe_pwd
+
+volumes:
+  safeBank_data: {}
+

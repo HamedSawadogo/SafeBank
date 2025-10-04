@@ -1,0 +1,33 @@
+spring:
+  application:
+    name: SafeBank
+  datasource:
+    url: jdbc:postgresql://localhost:5480/safedb
+    password: safe_pwd
+    username: safe_user
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        show_sql: true
+        format_sql: true
+        jdbc:
+          batch_size: 50
+        order_updates: true
+
+# JWT Configuration
+application:
+  security:
+    jwt:
+      secret-key: "z9T8s4BvLmQ1Xp7Kc3RdEjWnYuHtGePoz9T8s4BvLmQ1ekrkXp7Kc3RdEekekz9T8s4BvLmQ1Xp7Kc3RdEjWnYuHtGePoWnYuHtGePo"
+      expiration: 86400000 # 24h en ms
+      refresh-token:
+        expiration: 604800000 # 7j en ms
+server:
+  port: 9091
+  servlet:
+    context-path: /api/v1
+
