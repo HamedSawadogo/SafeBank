@@ -2,21 +2,20 @@ package org.safebank.consumersservice.infrastructure.springframework.in.dtos;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.Builder;
 
-@Getter
-@NoArgsConstructor @AllArgsConstructor
-public class CreateConsumerDto {
+@Builder
+public record CreateConsumerDto(
     @NotBlank
-    String firstName;
+    String firstName,
     @NotBlank
-    String lastName;
+    String lastName,
     @Email
-    String email;
+    String email,
     @NotBlank
-    String phoneNumber;
+    String phoneNumber,
     @NotBlank
-    String country;
-}
+    String country
+) {
+
+        }

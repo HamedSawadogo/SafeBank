@@ -1,0 +1,17 @@
+services:
+  safebank-consumers-db:
+    image: postgres:latest
+    container_name: safebank-consumers-db
+    restart: unless-stopped
+    ports:
+      - 5481:5432
+    volumes:
+      - safeBank_consumers_data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: safe_user
+      POSTGRES_DB: safe-consumers-db
+      POSTGRES_PASSWORD: safe_pwd
+
+volumes:
+  safeBank_consumers_data: {}
+

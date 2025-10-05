@@ -1,9 +1,9 @@
 package org.safebank.consumersservice.infrastructure.springframework.out.persistance.repositories.adapters;
 
-import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.safebank.consumersservice.application.gateways.ConsumerRepositoryPort;
 import org.safebank.consumersservice.domain.models.Consumer;
+import org.safebank.consumersservice.infrastructure.springframework.out.persistance.entities.ConsumerSchema;
 import org.safebank.consumersservice.infrastructure.springframework.out.persistance.repositories.jpa.ConsumerJpaRepository;
 import org.springframework.stereotype.Repository;
 import java.util.List;
@@ -11,11 +11,14 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Repository
-@RequiredArgsConstructor
 public class ConsumerJpaRepositoryAdapter implements ConsumerRepositoryPort  {
-
     private final ModelMapper modelMapper;
     private final ConsumerJpaRepository consumerJpaRepository;
+
+    public ConsumerJpaRepositoryAdapter(ModelMapper modelMapper, ConsumerJpaRepository consumerJpaRepository) {
+        this.modelMapper = modelMapper;
+        this.consumerJpaRepository = consumerJpaRepository;
+    }
 
     @Override
     public Optional<Consumer> findById(String id) {
@@ -34,7 +37,8 @@ public class ConsumerJpaRepositoryAdapter implements ConsumerRepositoryPort  {
 
     @Override
     public Consumer save(Consumer consumer) {
-        return null;
+        var schema = modelMapper.map(consumer, ConsumerSchema.class);
+        return modelMapper.map(consumerJpaRepository.save(schema), Consumer.class);
     }
 
     @Override

@@ -18,6 +18,7 @@ public class CreateConsumerUseCase {
 
     public Consumer handle(CreateConsumerCommand command) {
         log.info("received command: " + command);
+        System.err.println("Email ??" + consumerPort.existByEmail(command.email()));
         if (consumerPort.existByEmail(command.email())) {
            log.info("consumer with email " + command.email() + " already exists");
            throw new ConsumerNotFoundException(String.format("consumer with email %s already exists", command.email()));
