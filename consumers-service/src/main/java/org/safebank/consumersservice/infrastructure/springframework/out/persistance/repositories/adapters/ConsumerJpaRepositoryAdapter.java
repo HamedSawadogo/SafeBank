@@ -1,9 +1,9 @@
 package org.safebank.consumersservice.infrastructure.springframework.out.persistance.repositories.adapters;
 
 import org.modelmapper.ModelMapper;
-import org.safebank.consumersservice.application.gateways.ConsumerRepositoryPort;
+import org.safebank.consumersservice.application.ports.ConsumerRepositoryPort;
 import org.safebank.consumersservice.domain.models.Consumer;
-import org.safebank.consumersservice.infrastructure.springframework.out.persistance.entities.ConsumerSchema;
+import org.safebank.consumersservice.infrastructure.springframework.in.mappers.ConsumerMapper;
 import org.safebank.consumersservice.infrastructure.springframework.out.persistance.repositories.jpa.ConsumerJpaRepository;
 import org.springframework.stereotype.Repository;
 import java.util.List;
@@ -13,10 +13,12 @@ import java.util.UUID;
 @Repository
 public class ConsumerJpaRepositoryAdapter implements ConsumerRepositoryPort  {
     private final ModelMapper modelMapper;
+    private final ConsumerMapper consumerMapper;
     private final ConsumerJpaRepository consumerJpaRepository;
 
-    public ConsumerJpaRepositoryAdapter(ModelMapper modelMapper, ConsumerJpaRepository consumerJpaRepository) {
+    public ConsumerJpaRepositoryAdapter(ModelMapper modelMapper, ConsumerMapper consumerMapper, ConsumerJpaRepository consumerJpaRepository) {
         this.modelMapper = modelMapper;
+        this.consumerMapper = consumerMapper;
         this.consumerJpaRepository = consumerJpaRepository;
     }
 
@@ -37,7 +39,7 @@ public class ConsumerJpaRepositoryAdapter implements ConsumerRepositoryPort  {
 
     @Override
     public Consumer save(Consumer consumer) {
-        var schema = modelMapper.map(consumer, ConsumerSchema.class);
+        var schema = consumerMapper.toSchema(consumer);
         return modelMapper.map(consumerJpaRepository.save(schema), Consumer.class);
     }
 

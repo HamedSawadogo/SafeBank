@@ -1,8 +1,11 @@
 package org.safebank.consumersservice.infrastructure.springframework.in.mappers;
 
 import org.safebank.consumersservice.application.usecases.commands.CreateConsumerCommand;
+import org.safebank.consumersservice.domain.models.Consumer;
 import org.safebank.consumersservice.infrastructure.springframework.in.dtos.CreateConsumerDto;
+import org.safebank.consumersservice.infrastructure.springframework.out.persistance.entities.ConsumerSchema;
 import org.springframework.stereotype.Component;
+
 
 @Component
 public class ConsumerMapper {
@@ -17,5 +20,18 @@ public class ConsumerMapper {
            dto.phoneNumber(),
            dto.country()
         );
+    }
+
+    public ConsumerSchema toSchema(Consumer consumer) {
+        if (consumer == null) {
+            return null;
+        }
+        var consumerSchema = new ConsumerSchema();
+        consumerSchema.setFirstName(consumer.getFirstName());
+        consumerSchema.setLastName(consumer.getLastName());
+        consumerSchema.setEmail(consumer.getEmail());
+        consumerSchema.setPhoneNumber(consumer.getPhoneNumber());
+        consumerSchema.setCountry(consumer.getCountry());
+        return consumerSchema;
     }
 }

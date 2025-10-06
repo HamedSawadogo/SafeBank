@@ -1,4 +1,4 @@
-package org.safebank.consumersservice.application.gateways;
+package org.safebank.consumersservice.application.ports;
 
 import org.safebank.consumersservice.domain.models.Consumer;
 
