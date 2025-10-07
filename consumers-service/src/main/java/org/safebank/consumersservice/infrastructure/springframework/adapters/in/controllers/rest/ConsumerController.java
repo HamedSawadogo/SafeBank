@@ -1,11 +1,9 @@
-package org.safebank.consumersservice.infrastructure.springframework.in;
+package org.safebank.consumersservice.infrastructure.springframework.adapters.in.controllers.rest;
 
-import org.modelmapper.ModelMapper;
-import org.safebank.consumersservice.application.usecases.commands.CreateConsumerCommand;
 import org.safebank.consumersservice.application.usecases.consumers.CreateConsumerUseCase;
 import org.safebank.consumersservice.domain.models.Consumer;
-import org.safebank.consumersservice.infrastructure.springframework.in.dtos.CreateConsumerDto;
-import org.safebank.consumersservice.infrastructure.springframework.in.mappers.ConsumerMapper;
+import org.safebank.consumersservice.infrastructure.commons.dtos.CreateConsumerDto;
+import org.safebank.consumersservice.infrastructure.commons.mappers.ConsumerMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;

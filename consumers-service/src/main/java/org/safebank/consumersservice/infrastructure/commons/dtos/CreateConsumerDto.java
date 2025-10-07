@@ -1,4 +1,4 @@
-package org.safebank.consumersservice.infrastructure.springframework.in.dtos;
+package org.safebank.consumersservice.infrastructure.commons.dtos;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;

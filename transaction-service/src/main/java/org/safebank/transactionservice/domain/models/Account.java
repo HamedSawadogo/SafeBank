@@ -1,14 +1,17 @@
 package org.safebank.transactionservice.domain.models;
 
 import org.safebank.transactionservice.domain.enums.AccountType;
+import org.safebank.transactionservice.domain.exceptions.InvalidAmountException;
 import org.safebank.transactionservice.domain.valueobjects.AccountId;
+import org.safebank.transactionservice.domain.valueobjects.Amount;
 import java.math.BigDecimal;
 import java.time.Instant;
+
 
 public class Account {
     private AccountId accountId;
     private String accountNumber;
-    private BigDecimal balance;
+    private Amount amount;
     private Instant creationDate;
     private Instant lastUpdateDate;
     private Boolean isActive;
@@ -18,7 +21,7 @@ public class Account {
     private ConsumerPreview owner;
 
     public Account() {
-        this.balance = BigDecimal.valueOf(0);
+        this.amount = new Amount(BigDecimal.ZERO);
     }
 
     public Account(
@@ -28,7 +31,7 @@ public class Account {
     ) {
         this.accountId = accountId;
         this.accountNumber = accountNumber;
-        this.balance = balance;
+        this.amount = new Amount(balance);
         this.creationDate = creationDate;
         this.lastUpdateDate = lastUpdateDate;
         this.isActive = isActive;
@@ -53,15 +56,15 @@ public class Account {
         this.accountNumber = accountNumber;
     }
 
-    public BigDecimal getBalance() {
-        return balance;
+    public Amount getAmount() {
+        return this.amount;
     }
 
-    public void setBalance(BigDecimal balance) {
-        if (balance.compareTo(BigDecimal.ZERO) < 0) {
-            balance = BigDecimal.ZERO;
+    public void setAmount(Amount amount) {
+        if (amount == null)  {
+            throw new InvalidAmountException("")
         }
-        this.balance = balance;
+        this.amount = amount;
     }
 
     public Instant getCreationDate() {

@@ -1,9 +1,9 @@
-package org.safebank.consumersservice.infrastructure.springframework.in.mappers;
+package org.safebank.consumersservice.infrastructure.commons.mappers;
 
 import org.safebank.consumersservice.application.usecases.commands.CreateConsumerCommand;
 import org.safebank.consumersservice.domain.models.Consumer;
-import org.safebank.consumersservice.infrastructure.springframework.in.dtos.CreateConsumerDto;
-import org.safebank.consumersservice.infrastructure.springframework.out.persistance.entities.ConsumerSchema;
+import org.safebank.consumersservice.infrastructure.commons.dtos.CreateConsumerDto;
+import org.safebank.consumersservice.infrastructure.springframework.adapters.out.persistance.jpa.entities.ConsumerSchema;
 import org.springframework.stereotype.Component;
 
 

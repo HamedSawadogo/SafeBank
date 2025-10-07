@@ -1,10 +1,10 @@
-package org.safebank.consumersservice.infrastructure.springframework.out.persistance.repositories.adapters;
+package org.safebank.consumersservice.infrastructure.springframework.adapters.out.persistance.jpa.repositories;
 
 import org.modelmapper.ModelMapper;
 import org.safebank.consumersservice.application.ports.ConsumerRepositoryPort;
 import org.safebank.consumersservice.domain.models.Consumer;
-import org.safebank.consumersservice.infrastructure.springframework.in.mappers.ConsumerMapper;
-import org.safebank.consumersservice.infrastructure.springframework.out.persistance.repositories.jpa.ConsumerJpaRepository;
+import org.safebank.consumersservice.infrastructure.commons.mappers.ConsumerMapper;
+import org.safebank.consumersservice.infrastructure.springframework.adapters.out.persistance.jpa.repositories.jpa.ConsumerJpaRepository;
 import org.springframework.stereotype.Repository;
 import java.util.List;
 import java.util.Optional;

@@ -4,9 +4,9 @@ package org.safebank.transactionservice.application.usecases.deposit;
 import org.safebank.transactionservice.application.ports.AuthenticationPort;
 import org.safebank.transactionservice.application.ports.TransactionPort;
 import org.safebank.transactionservice.domain.exceptions.AccountNotFoundException;
-import org.safebank.transactionservice.domain.exceptions.AmountInvalidException;
 import org.safebank.transactionservice.domain.exceptions.UnAuthorizedConsumerException;
 import org.safebank.transactionservice.domain.valueobjects.AccountId;
+import org.safebank.transactionservice.domain.valueobjects.Amount;
 
 import java.math.BigDecimal;
 
@@ -19,7 +19,7 @@ public class DepositUseCase {
         this.authenticationPort = authenticationPort;
     }
 
-    public synchronized BigDecimal handle(final AccountId accountId, final BigDecimal amount) {
+    public Amount handle(final AccountId accountId, final BigDecimal amount) {
        var authenticatedUser =  authenticationPort.getAuthenticatedConsumer();
        if (authenticatedUser == null || !isOwnerAuthenticateConsumer(accountId)) {
            throw new UnAuthorizedConsumerException("this consumer is unAuthorized to process this operation");
@@ -29,13 +29,11 @@ public class DepositUseCase {
            throw new AccountNotFoundException("account with id " + accountId + " not found");
        }
        var account = accountFound.get();
-       if (account.getBalance().compareTo(BigDecimal.ZERO) <= 0) {
-           throw new  AmountInvalidException("invalid amount");
-       }
-       var accountAmount = account.getBalance();
-       account.setBalance(accountAmount.add(amount));
-       transactionPort.updateAmount(account);
-       return account.getBalance();
+       var accountAmount = account.getAmount().amount();
+       var newAmount =  new Amount(accountAmount.add(amount));
+       account.setAmount(newAmount);
+       transactionPort.updateAmount(accountId, newAmount);
+       return newAmount;
     }
 
     private boolean isOwnerAuthenticateConsumer(final AccountId accountId) {

@@ -1,4 +1,4 @@
-package org.safebank.consumersservice.infrastructure.springframework.out.persistance.entities;
+package org.safebank.consumersservice.infrastructure.springframework.adapters.out.persistance.jpa.entities;
 
 import jakarta.persistence.*;
 import lombok.*;
