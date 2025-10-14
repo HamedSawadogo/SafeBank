@@ -1,7 +1,5 @@
 package org.safebank.transactionservice.infrastructure.out.persistance.jpa.repositories;
 
-import org.safebank.transactionservice.domain.valueobjects.AccountId;
-import org.safebank.transactionservice.domain.valueobjects.Amount;
 import org.safebank.transactionservice.infrastructure.out.persistance.jpa.schemas.AccountSchema;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;

@@ -62,7 +62,7 @@ public class Account {
 
     public void setAmount(Amount amount) {
         if (amount == null)  {
-            throw new InvalidAmountException("")
+            throw new InvalidAmountException("");
         }
         this.amount = amount;
     }

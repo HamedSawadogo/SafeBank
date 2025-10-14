@@ -1,6 +1,5 @@
 package org.safebank.transactionservice.domain.valueobjects;
 
-import org.safebank.transactionservice.domain.enums.AmountCurrency;
 import org.safebank.transactionservice.domain.exceptions.InvalidAmountException;
 import java.math.BigDecimal;
 
